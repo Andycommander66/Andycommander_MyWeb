@@ -237,6 +237,73 @@ shared/
 | 恶意写入超大内容 | 请求体上限 512KB，并校验必需分区 |
 | 目录穿越 | 静态资源路径解析后强制校验是否仍在 `dist/` 内 |
 
+## 数据的自动统计
+
+**页面上的数字没有一个需要手填**，全部由 `src/utils/stats.js` 从条目算出。
+加一条荣誉、改一次等级，统计与分组说明会自动跟随 —— 不会再出现「加了条目忘了改数字」。
+
+| 指标 | 怎么算出来的 |
+|---|---|
+| `totalAwards` 奖项与荣誉总数 | 重点荣誉 + 青马工程 + 校级称号 + 校级竞赛 |
+| `highLevel` 市级及以上 | 等级文字命中 国家级 / 全国 / 省级 / 跨省 / 区域级 / 市级 |
+| `university` 大学阶段 | 等级文字含「大学」 |
+| `provincial` 省级赛事入围 | 条目勾选了「入围省赛」 |
+| `qingma` 三级培养 | 青马工程卡片是否存在 |
+| `school` / `titles` / `contests` | 校级三个数组的长度 |
+| `current` 现任职务与身份 | 时间线里时间含「至今」的条目 |
+| `studyYear` / `studyPercent` / `grade` | 由入学年份与学制年数推算，**每年 9 月自动进位** |
+
+### 两种用法
+
+**数据指标项**：在管理后台给每一项选一个「统计指标」，数字就交给系统算；
+留空则用手填数值（兼容旧写法）。
+
+```json
+{ "metric": "totalAwards", "label": "奖项与荣誉" }
+```
+
+**文案模板**：分组说明、列标题里可以写占位符，渲染时替换成实际数字；
+认不出的占位符原样保留，方便一眼看出写错了。
+
+```json
+"featureNote": "市级及以上 {highLevel} 项 · 大学阶段 {university} 项 · 三级培养 {qingma} 项"
+```
+
+> 新增指标只要在 `stats.js` 的 `computeStats` 加一行，
+> 再到 `src/admin/schema.js` 的 `METRICS` 加一行，后台下拉框就会出现。
+
+### 排查内容来源
+
+页面根元素上带有来源标记，右键「检查」看 `<html data-content-source="...">`：
+
+| 值 | 含义 |
+|---|---|
+| `server` | 已连上后端，展示的是后台内容 |
+| `default` | 读不到后端，正在用内置默认内容 |
+| `preview` | 管理员正在预览未保存的草稿 |
+| `loading` | 还在拉取中 |
+
+## 上传到 GitHub
+
+仓库已在本地初始化并提交完毕（分支 `main`），只差推送这一步：
+
+```bash
+cd myweb-vue
+
+# 1. 在 GitHub 上新建一个空仓库（不要勾选 README / .gitignore / License）
+
+# 2. 关联远程并推送
+git remote add origin https://github.com/Andycommander66/仓库名.git
+git push -u origin main
+```
+
+如果本机配置过 SSH，也可以用 `git@github.com:Andycommander66/仓库名.git`。
+
+> **推送前请确认 `git status` 是干净的**，并且不要把下面这些提交上去：
+> `server/config.json`（管理密码）、`server/data/`（内容与备份）、
+> `_deploy/`（部署包）、`1Panel部署手册.md`（含服务器地址）。
+> `.gitignore` 已经拦住它们，用 `**/` 前缀是为了嵌套目录也能拦住。
+
 ## 部署
 
 ### A. 带后端（推荐，可在网页上改内容）
