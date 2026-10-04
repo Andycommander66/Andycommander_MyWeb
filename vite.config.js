@@ -50,13 +50,6 @@ function seoFilesPlugin() {
 
             fs.writeFileSync(path.join(outDir, 'robots.txt'), buildRobots(origin), 'utf8')
 
-            // public/ 下的文件是原样拷贝的，不会走 define，这里手动替换路由模式占位符
-            const notFound = path.join(outDir, '404.html')
-            if (fs.existsSync(notFound)) {
-                fs.writeFileSync(notFound,
-                    fs.readFileSync(notFound, 'utf8').replace(/__URL_MODE__/g, URL_MODE), 'utf8')
-            }
-
             if (origin) {
                 fs.writeFileSync(path.join(outDir, 'sitemap.xml'),
                     buildSitemap(origin, { mode: URL_MODE }), 'utf8')

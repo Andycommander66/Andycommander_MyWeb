@@ -4,24 +4,95 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>404 · Andycommander66</title>
+    <title>404 · 页面未找到 · Andycommander66</title>
     <meta name="robots" content="noindex, follow">
     <meta name="theme-color" content="#0f0408">
-    <script>
-        // 路径级 404 兜底：把请求交回单页应用的 404 路由。
-        // 路由模式由构建变量决定，这里用同样的规则拼目标地址，避免两处不一致。
-        (function () {
-            var MODE = '__URL_MODE__';
-            var base = location.pathname.replace(/[^/]*$/, '');
-            location.replace(MODE === 'hash' ? base + '#/404' : base + '404');
-        })();
-    </script>
+    <link rel="icon" type="image/x-icon" href="./andy.ico">
+    <!--
+      这是给「没有配置 SPA 回退」的静态托管用的兜底页。
+
+      它刻意不做任何跳转：那种托管对任何未知路径都会返回本页，
+      若本页再跳回某个路径，就会来回重定向、永远出不去。
+      所以这里直接给出来访者一个能点的入口。
+
+      用 server/index.js 部署时不需要它 —— 后端自己会把未命中的路径
+      回退到 index.html，由前端路由渲染完整的 404 页面。
+    -->
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: radial-gradient(circle at 50% 30%, #2a0a10 0%, #0f0408 70%);
+            color: #c5b8bb;
+            font-family: 'PingFang SC', 'Microsoft YaHei', system-ui, sans-serif;
+            text-align: center;
+            padding: 24px;
+        }
+
+        .card {
+            max-width: 420px;
+        }
+
+        .code {
+            font-size: clamp(4rem, 18vw, 7rem);
+            font-weight: 800;
+            line-height: 1;
+            letter-spacing: 0.04em;
+            background: linear-gradient(135deg, #f0c0c5 0%, #e8808a 35%, #d44550 65%, #f0a0a8 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        h1 {
+            margin: 12px 0 8px;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #f5f0f1;
+            letter-spacing: 0.05em;
+        }
+
+        p {
+            margin: 0 0 24px;
+            font-size: 0.9rem;
+            line-height: 1.8;
+            letter-spacing: 0.04em;
+        }
+
+        .link {
+            display: inline-block;
+            padding: 11px 26px;
+            border-radius: 999px;
+            border: 1px solid rgba(230, 120, 130, 0.45);
+            background: rgba(200, 55, 70, 0.18);
+            color: #ffeef0;
+            text-decoration: none;
+            font-size: 0.88rem;
+            letter-spacing: 0.05em;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .link:hover {
+            border-color: rgba(240, 140, 150, 0.7);
+            background: rgba(210, 65, 80, 0.3);
+        }
+    </style>
 </head>
 
-<body style="margin:0;background:#0f0408;color:#c5b8bb;font-family:'PingFang SC','Microsoft YaHei',sans-serif">
-    <noscript>
-        <p style="padding:24px">页面未找到。<a href="./" style="color:#f0a0a8">返回主页</a></p>
-    </noscript>
+<body>
+    <div class="card">
+        <div class="code">404</div>
+        <h1>页面未找到</h1>
+        <p>你访问的地址不存在，或者已经被移走了。</p>
+        <a class="link" href="./">返回主页 →</a>
+    </div>
 </body>
 
 </html>

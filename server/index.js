@@ -224,14 +224,15 @@ function serveStatic(req, res, urlPath) {
     }
 
     if (!fs.existsSync(file) || fs.statSync(file).isDirectory()) {
-        if (rel && fs.existsSync(path.join(DIST_DIR, rel + '.html'))) {
-            file = path.join(DIST_DIR, rel + '.html')
-        } else if (rel === '404.html' && fs.existsSync(path.join(DIST_DIR, '404.html'))) {
-            file = path.join(DIST_DIR, '404.html')
-        } else {
-            // SPA 回退
-            file = path.join(DIST_DIR, 'index.html')
-        }
+        /*
+         * 一律回退到 index.html，交给前端路由处理。
+         *
+         * 这里刻意不再找「同名 .html」：那是旧多页站点的做法，
+         * 而 dist/404.html 恰恰是个静态兜底页，一旦 /404 命中它、
+         * 而它又跳回 /404，就会变成无限重定向。
+         * dist/404.html 只对「没有 SPA 回退」的第三方静态托管有意义。
+         */
+        file = path.join(DIST_DIR, 'index.html')
     }
 
     if (!fs.existsSync(file)) {
