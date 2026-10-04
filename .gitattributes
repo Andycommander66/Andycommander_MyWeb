@@ -1,0 +1,13 @@
+# 统一换行符为 LF，避免 Windows 上提交时出现的 CRLF 警告与跨平台差异
+* text=auto eol=lf
+
+# 二进制文件不做换行转换
+*.ico binary
+*.png binary
+*.jpg binary
+*.webp binary
+*.woff2 binary
+
+# 锁文件在合并时不做逐行处理，减少无谓冲突
+pnpm-lock.yaml -diff merge=binary
+package-lock.json -diff merge=binary
