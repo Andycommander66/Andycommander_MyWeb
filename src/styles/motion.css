@@ -1,0 +1,489 @@
+/* ==========================================================================
+   motion.css — 全站动效与交互反馈层
+   只增加动效与交互层次，不改动任何配色、字体、版式与图形元素。
+   本文件必须在内联 <style> 之前引入，页面自身样式优先。
+   ========================================================================== */
+
+/* ---------- 1. 入场动画（首屏元素错峰浮现） ---------- */
+/* 由开屏动画决定时机：html.boot-done 之后才开始，避免与开屏重叠；
+   脚本不可用时该类名不存在，元素保持自然状态（可见）。 */
+@media (prefers-reduced-motion: no-preference) {
+    html.boot-done [data-enter] {
+        animation: enterUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) backwards;
+        animation-delay: var(--enter-delay, 0s);
+    }
+
+    /* 靠 transform 定位的元素只能做淡入，避免破坏居中 */
+    html.boot-done [data-enter="fade"] {
+        animation: enterFade 1s ease backwards;
+        animation-delay: var(--enter-delay, 0s);
+    }
+
+    /* 首屏 Hero 逐行错峰 */
+    .hero-stagger > [data-enter]:nth-child(1) {
+        --enter-delay: 0.10s;
+    }
+    .hero-stagger > [data-enter]:nth-child(2) {
+        --enter-delay: 0.17s;
+    }
+    .hero-stagger > [data-enter]:nth-child(3) {
+        --enter-delay: 0.24s;
+    }
+    .hero-stagger > [data-enter]:nth-child(4) {
+        --enter-delay: 0.31s;
+    }
+    .hero-stagger > [data-enter]:nth-child(5) {
+        --enter-delay: 0.38s;
+    }
+    .hero-stagger > [data-enter]:nth-child(6) {
+        --enter-delay: 0.45s;
+    }
+    .hero-stagger > [data-enter]:nth-child(7) {
+        --enter-delay: 0.52s;
+    }
+
+    /* 只定义起始帧：动画结束后不驻留 transform，避免顶掉悬停位移 */
+    @keyframes enterUp {
+        from {
+            opacity: 0;
+            transform: translate3d(0, 14px, 0);
+        }
+    }
+
+    @keyframes enterFade {
+        from {
+            opacity: 0;
+        }
+    }
+}
+
+/* ---------- 2. 开屏动画 ---------- */
+/* 是否渲染由 Vue 控制：脚本不可用时组件根本不会挂载，
+   所以不需要 CSS 兜底隐藏；这里只管样式与开屏期间的锁滚动。 */
+html.booting,
+html.booting body {
+    overflow: hidden;
+}
+
+.boot-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 200;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    cursor: default;
+    background: #0f0408;
+    background-image:
+        radial-gradient(ellipse at 50% 46%, rgba(120, 20, 32, 0.55) 0%, transparent 62%),
+        radial-gradient(ellipse at 30% 22%, rgba(90, 15, 25, 0.5) 0%, transparent 60%),
+        radial-gradient(ellipse at 72% 78%, rgba(60, 10, 18, 0.45) 0%, transparent 58%);
+    transition:
+        opacity 0.62s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.boot-screen.is-done {
+    opacity: 0;
+    transform: scale(1.03);
+    pointer-events: none;
+}
+
+/* 开屏内的网格纹理，沿用站点视觉语言 */
+.boot-screen::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.04;
+    background-image:
+        linear-gradient(rgba(210, 140, 150, 0.5) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(210, 140, 150, 0.5) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+
+.boot-mark {
+    position: relative;
+    font-size: clamp(1.25rem, 4.6vw, 2rem);
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-indent: 0.16em;
+    background: linear-gradient(135deg, #f0c0c5 0%, #e8808a 35%, #d44550 65%, #f0a0a8 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    opacity: 0;
+    animation: bootMark 0.72s cubic-bezier(0.25, 0.46, 0.45, 0.94) 0.06s forwards;
+}
+
+@keyframes bootMark {
+    from {
+        opacity: 0;
+        transform: translate3d(0, 10px, 0);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.boot-bar {
+    position: relative;
+    width: clamp(112px, 24vw, 180px);
+    height: 2px;
+    border-radius: 2px;
+    overflow: hidden;
+    background: rgba(255, 220, 225, 0.08);
+}
+
+.boot-bar i {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: 2px;
+    background: linear-gradient(90deg, #b03040, #d44550, #e8606b);
+    box-shadow: 0 0 10px rgba(220, 80, 95, 0.6);
+    animation: bootBar 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.14s forwards;
+}
+
+@keyframes bootBar {
+    to {
+        width: 100%;
+    }
+}
+
+.boot-note {
+    position: relative;
+    font-size: 0.66rem;
+    letter-spacing: 0.24em;
+    text-indent: 0.24em;
+    color: rgba(190, 160, 165, 0.5);
+    text-transform: uppercase;
+    opacity: 0;
+    animation: bootNote 0.7s ease 0.26s forwards;
+}
+
+@keyframes bootNote {
+    to {
+        opacity: 1;
+    }
+}
+
+/* 开屏是否播放由脚本判断（reduced-motion 下不会挂载组件），此处无需 CSS 兜底 */
+
+/* ---------- 3. 滚动揭示 ---------- */
+/* 揭示状态记在 data-reveal 的值上（pending → visible），而不是 class。
+   原因：指令若用 classList.add 标记，一旦该元素同时有 Vue 的动态 :class，
+   Vue 改写 className 时会把指令加的 class 一并抹掉，元素会突然变回隐藏。
+   data-* 属性只要模板里不绑定，Vue 就永远不会碰它。 */
+[data-reveal] {
+    transition:
+        opacity 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+        transform 0.85s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    transition-delay: var(--reveal-delay, 0s);
+}
+
+/* 只在未揭示时隐藏；揭示后交还给页面自身样式（悬停位移等不受影响）。
+   同时以 .js 限定，脚本失效时内容依然可见。 */
+@media (prefers-reduced-motion: no-preference) {
+    .js [data-reveal="pending"] {
+        opacity: 0;
+        transform: translate3d(0, 18px, 0);
+    }
+}
+
+/* ---------- 4. 卡片光标 / 手指跟随光斑 ---------- */
+.spotlight {
+    position: relative;
+}
+
+.spotlight::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%),
+            rgba(232, 96, 107, 0.10),
+            transparent 62%);
+    transition: opacity 0.7s ease;
+}
+
+.spotlight:hover::after,
+.spotlight.is-touching::after {
+    opacity: 1;
+}
+
+/* 触屏上光斑略微加强，弥补没有 hover 的层次感 */
+@media (hover: none) and (pointer: coarse) {
+    .spotlight::after {
+        background: radial-gradient(200px circle at var(--mx, 50%) var(--my, 50%),
+                rgba(232, 96, 107, 0.16),
+                transparent 64%);
+    }
+}
+
+/* ---------- 5. 导航内滚动进度（替代原先的顶部通栏线） ---------- */
+.nav-glass {
+    overflow: hidden;
+}
+
+.nav-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    border-radius: inherit;
+    pointer-events: none;
+    background: rgba(255, 220, 225, 0.055);
+    opacity: 0;
+    transition: opacity 0.6s ease;
+}
+
+.nav-glass.is-scrollable .nav-progress {
+    opacity: 1;
+}
+
+.nav-progress-fill {
+    display: block;
+    height: 100%;
+    width: 0;
+    border-radius: inherit;
+    background: linear-gradient(90deg, rgba(176, 48, 64, 0.85), #d44550, #e8606b);
+    box-shadow: 0 0 10px rgba(220, 80, 95, 0.55);
+    transition: width 0.18s linear;
+}
+
+/* ---------- 6. 回到顶部 ---------- */
+.to-top {
+    position: fixed;
+    right: max(22px, env(safe-area-inset-right));
+    bottom: max(22px, env(safe-area-inset-bottom));
+    z-index: 60;
+    width: 42px;
+    height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    line-height: 1;
+    color: rgba(245, 230, 232, 0.85);
+    border: 1px solid rgba(210, 100, 110, 0.28);
+    background: rgba(18, 6, 10, 0.6);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    box-shadow: 0 0 22px rgba(200, 70, 80, 0.12);
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(8px) scale(0.94);
+    pointer-events: none;
+    transition: all 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.to-top.is-active {
+    opacity: 1;
+    transform: none;
+    pointer-events: auto;
+}
+
+.to-top:hover {
+    border-color: rgba(230, 120, 130, 0.55);
+    background: rgba(200, 55, 70, 0.18);
+    box-shadow: 0 0 26px rgba(200, 60, 75, 0.25);
+    color: #fff5f5;
+}
+
+/* ---------- 7. 交互反馈 ---------- */
+.hero-cta,
+.btn-404,
+.status-tag,
+.channel,
+.honor {
+    will-change: transform;
+}
+
+.hero-cta:active,
+.btn-404:active {
+    transform: translateY(0) scale(0.985);
+}
+
+.status-tag:hover {
+    transform: translateY(-1px);
+}
+
+a:focus-visible,
+button:focus-visible,
+[tabindex]:focus-visible {
+    outline: 1px solid rgba(230, 120, 130, 0.65);
+    outline-offset: 3px;
+    border-radius: 8px;
+}
+
+.nav-link {
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -5px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(230, 120, 130, 0.75), transparent);
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
+    transform: scaleX(1);
+}
+
+/* ---------- 8. 数字滚动 ---------- */
+[data-count] {
+    font-variant-numeric: tabular-nums;
+}
+
+/* ---------- 9. 平滑滚动 ---------- */
+@media (prefers-reduced-motion: no-preference) {
+    html {
+        scroll-behavior: smooth;
+    }
+}
+
+/* ---------- 10. 低动效偏好降级 ---------- */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+    }
+
+    [data-reveal],
+    .js [data-reveal="pending"] {
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    .to-top {
+        transition: none;
+    }
+}
+
+/* ---------- 11. 移动端收边 ---------- */
+@media (max-width: 480px) {
+    .to-top {
+        width: 38px;
+        height: 38px;
+    }
+}
+
+/* ---------- 12. 路由切换过渡 ---------- */
+/* 配合 <Transition name="page" mode="out-in">：
+   旧页先向上淡出，新页再自下淡入，方向感与页面的纵向阅读一致 */
+@media (prefers-reduced-motion: no-preference) {
+    .page-enter-active {
+        transition:
+            opacity 0.46s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            transform 0.46s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .page-leave-active {
+        transition:
+            opacity 0.28s ease,
+            transform 0.28s ease;
+    }
+
+    .page-enter-from {
+        opacity: 0;
+        transform: translate3d(0, 14px, 0);
+    }
+
+    .page-leave-to {
+        opacity: 0;
+        transform: translate3d(0, -10px, 0);
+    }
+}
+
+
+
+/* ---------- 13. 细节微交互 ---------- */
+/* 只在真正支持悬停的设备上生效，触屏不触发，避免误触高亮 */
+@media (hover: hover) {
+    .status-tag {
+        transition:
+            transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+            border-color 0.5s ease,
+            background-color 0.5s ease,
+            color 0.5s ease;
+    }
+
+    .status-tag:hover {
+        transform: translateY(-1px);
+        border-color: rgba(232, 140, 150, 0.42);
+    }
+
+    .data-item {
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .data-item:hover {
+        transform: translateY(-2px);
+    }
+
+    .data-number {
+        transition: text-shadow 0.5s ease;
+    }
+
+    .data-item:hover .data-number {
+        text-shadow: 0 0 20px rgba(240, 140, 150, 0.45);
+    }
+
+    .data-label {
+        transition: color 0.5s ease;
+    }
+
+    .data-item:hover .data-label {
+        color: #ded2d4;
+    }
+}
+
+/* ---------- 14. 键盘可达性 ---------- */
+/* 只在键盘聚焦时出现焦点环，鼠标点击不显示，兼顾美观与无障碍 */
+.hero-cta:focus-visible,
+.nav-link:focus-visible,
+.channel:focus-visible,
+.status-tag:focus-visible,
+.to-top:focus-visible {
+    outline: 2px solid rgba(232, 140, 150, 0.65);
+    outline-offset: 3px;
+    border-radius: 12px;
+}
+
+.admin-tab:focus-visible,
+.admin-add:focus-visible,
+.admin-item-actions button:focus-visible {
+    outline: 2px solid rgba(232, 140, 150, 0.65);
+    outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .status-tag:hover,
+    .data-item:hover {
+        transform: none;
+    }
+}

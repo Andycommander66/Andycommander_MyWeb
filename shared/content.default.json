@@ -1,0 +1,364 @@
+{
+  "site": {
+    "name": "Andycommander66",
+    "origin": "https://andycommander66.cn",
+    "icp": "沪ICP备2024108112号-1",
+    "copyright": "© 2026 Andycommander66",
+    "labName": "IPET 智能光电技术实验室",
+    "labUrl": "https://ipet.lzhilin.online:50000/"
+  },
+  "home": {
+    "tags": [
+      {
+        "text": "IPET 实验室成员",
+        "style": "",
+        "dot": ""
+      },
+      {
+        "text": "科研竞赛部 · 学生干事",
+        "style": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": ""
+      },
+      {
+        "text": "班级团支书",
+        "style": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);"
+      }
+    ],
+    "role": "计算机科学与技术 · IPET 智能光电技术实验室成员",
+    "subtitle": "湖南理工大学 2026 级在读 · 以竞赛驱动学习，从校级称号一路走到省级赛事。",
+    "stats": [
+      {
+        "metric": "highLevel",
+        "label": "市级及以上奖项"
+      },
+      {
+        "metric": "totalAwards",
+        "label": "奖项与荣誉"
+      },
+      {
+        "metric": "provincial",
+        "label": "省级赛事入围"
+      }
+    ],
+    "progress": {
+      "label": "本科阶段 · {grade}在读（第 {studyYear} 学年 / 共 {studyYears} 学年）",
+      "startYear": 2026,
+      "years": 4
+    },
+    "primaryCta": {
+      "text": "查看荣誉与经历",
+      "to": "/honors"
+    },
+    "secondaryCta": {
+      "text": "实验室官网",
+      "external": "https://ipet.lzhilin.online:50000/",
+      "name": "IPET 智能光电技术实验室"
+    }
+  },
+  "honors": {
+    "stats": [
+      {
+        "metric": "totalAwards",
+        "label": "奖项与荣誉"
+      },
+      {
+        "metric": "highLevel",
+        "label": "市级及以上奖项"
+      },
+      {
+        "metric": "provincial",
+        "label": "省级赛事入围"
+      },
+      {
+        "metric": "current",
+        "label": "现任职务与身份"
+      }
+    ],
+    "featureNote": "市级及以上 {highLevel} 项 · 大学阶段 {university} 项 · 三级培养 {qingma} 项",
+    "features": [
+      {
+        "level": "跨省区域级",
+        "tagStyle": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);",
+        "date": "2025.07",
+        "name": "第五届长三角青少年人工智能奥林匹克挑战赛（YAIOC）",
+        "award": "「AIGC艺术创生者」赛道 · AIGC音乐创作项目（高中组）三等奖",
+        "meta": "颁发：长三角青少年人工智能奥林匹克挑战赛组委会"
+      },
+      {
+        "level": "市级",
+        "tagStyle": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": "",
+        "date": "2024.05",
+        "name": "「工创·未来」第八届上海高中生论坛",
+        "award": "「工程+实践」模拟工程竞技挑战活动 · 最佳工程制作卓越奖",
+        "meta": "颁发：上海市教育委员会基础教育处 · 第八届上海高中生论坛组委会（集体项目）"
+      },
+      {
+        "level": "跨省区域级",
+        "tagStyle": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);",
+        "date": "2024.08",
+        "name": "上海交通大学第五届交大荣昶杯",
+        "award": "数学建模赛道 · 三等奖",
+        "meta": "颁发：上海交通大学学生创新中心 · 交大荣昶杯赛事组委会（团队项目）"
+      },
+      {
+        "level": "大学阶段",
+        "tagStyle": "",
+        "dot": "",
+        "date": "2026.09",
+        "name": "2026 年大学生「AI+信息素养」大赛湖南赛区学校选拔赛",
+        "award": "二等奖 · 已入围省赛",
+        "meta": "颁发：湖南理工大学图书馆",
+        "provincial": true
+      }
+    ],
+    "qingma": {
+      "level": "区级 · 三级培养",
+      "tagStyle": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+      "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);",
+      "date": "2023.09 — 2026.01",
+      "name": "上海市高中阶段「青马工程」三级培养 · 三级全部结业",
+      "award": "区级共产主义学校 · 校级党章学习小组 · 班级团支部政治学习",
+      "stages": [
+        {
+          "name": "区级共产主义学校",
+          "meta": "2025.08 — 2026.01 · 准予结业"
+        },
+        {
+          "name": "校级党章学习小组",
+          "meta": "2024.01 — 2024.12 · 准予结业"
+        },
+        {
+          "name": "班级团支部政治学习",
+          "meta": "2023.09 — 2023.12 · 准予结业"
+        }
+      ],
+      "meta": "各阶段分别由校团组织、校党组织、区教育党工委 / 团区委盖章认定"
+    },
+    "schoolNote": "高中阶段，共 {school} 项",
+    "schoolTitlesLabel": "称号 · {titles} 项",
+    "schoolTitles": [
+      {
+        "name": "校优秀学生干部",
+        "date": "2025.06"
+      },
+      {
+        "name": "校「行为规范示范员」",
+        "date": "2024.01 / 2025.01"
+      },
+      {
+        "name": "校「优秀图书管理员」",
+        "date": "2024.06"
+      },
+      {
+        "name": "校「三好学生」",
+        "date": "高中阶段"
+      },
+      {
+        "name": "校「行美之星」",
+        "date": "高二学年"
+      }
+    ],
+    "schoolContestsLabel": "竞赛 · {contests} 项",
+    "schoolContests": [
+      {
+        "name": "体育节会徽征集比赛 二等奖",
+        "date": "2025.10"
+      },
+      {
+        "name": "田径运动会会徽设计方案评比 三等奖",
+        "date": "2024.11"
+      },
+      {
+        "name": "校田径比赛 高三男子组 100 米 第四名",
+        "date": "2025.10"
+      },
+      {
+        "name": "校田径运动会 高一男子组 100 米 第三名",
+        "date": "2023.10"
+      },
+      {
+        "name": "校田径运动会 4×100 米接力 第三名",
+        "date": "2023.10"
+      },
+      {
+        "name": "科技节无人机足球比赛 三等奖",
+        "date": "高二学年"
+      },
+      {
+        "name": "校数学建模比赛 二等奖",
+        "date": "高二学年"
+      }
+    ],
+    "timeline": [
+      {
+        "date": "2026.09 — 至今",
+        "title": "湖南理工大学 · 计算机科学与技术（在读）",
+        "desc": "本科在读，主修计算机科学与技术专业，兼顾文化课与专业能力积累。"
+      },
+      {
+        "date": "2026.09 — 至今",
+        "title": "班级团支书",
+        "desc": "严谨细致地落实团内各项任务，主动加强与班级同学的沟通交流，协同做好班级建设工作。"
+      },
+      {
+        "date": "2026.09 — 至今",
+        "title": "信息科学与工程学院 科研竞赛部 · 学生干事",
+        "desc": "参与学院科研与竞赛相关工作的组织、协调与服务，配合完成各项集体任务。"
+      },
+      {
+        "date": "2026 — 至今",
+        "title": "IPET 智能光电技术实验室 · 成员",
+        "desc": "通过实验室 C/C++ 考核后加入。实验室面向计算机科学与技术、软件工程等专业开展科研、竞赛与工程实践培养，研究方向包括结构光场调控、智能光学成像、光通信与信号处理、新型光电子材料。"
+      },
+      {
+        "date": "2023.09 — 2026.01",
+        "title": "上海市高中阶段「青马工程」三级培养 · 三级全部结业",
+        "desc": "依次完成班级团支部政治学习（2023.09—2023.12）、校级党章学习小组（2024.01—2024.12）、区级共产主义学校（2025.08—2026.01）三个阶段，均准予结业。"
+      },
+      {
+        "date": "高中阶段",
+        "title": "劳动委员 · 数学课代表 · 信息课代表",
+        "desc": "协助老师传达教学要求，牵头组织互助复习，统筹班级卫生与校园执勤工作。"
+      },
+      {
+        "date": "高中阶段",
+        "title": "志愿服务",
+        "desc": "参与上海节能科技馆志愿服务，为参观者讲解节能知识；参与学校 150 周年校庆志愿服务，承担校友访谈与场地引导工作。"
+      }
+    ],
+    "skills": [
+      {
+        "text": "计算机科学与技术",
+        "style": "",
+        "dot": ""
+      },
+      {
+        "text": "C / C++ 工程实践",
+        "style": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": ""
+      },
+      {
+        "text": "数学建模与数据分析",
+        "style": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);"
+      },
+      {
+        "text": "AIGC 与数字内容创作",
+        "style": "",
+        "dot": ""
+      },
+      {
+        "text": "智能光电 · 计算机视觉",
+        "style": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": ""
+      },
+      {
+        "text": "团队协作与项目组织",
+        "style": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);"
+      }
+    ]
+  },
+  "projects": {
+    "githubUser": "Andycommander66",
+    "githubUrl": "https://github.com/Andycommander66",
+    "pinned": [
+      {
+        "name": "个人主页 · 本站",
+        "desc": "就是你现在看到的这个站点。由静态多页重构为 Vue 3 单页应用，包含激光线节点网络背景、滚动揭示、数字滚动、路由过渡与站外跳转提示页。",
+        "lang": "Vue",
+        "stars": 0,
+        "updated": "2026",
+        "url": "https://github.com/Andycommander66",
+        "pinned": true
+      }
+    ],
+    "fallback": [
+      {
+        "name": "cs2-map-bp-tool",
+        "desc": "该工具旨在为 CS2 玩家提供便捷的地图 banning（禁用）和 picking（选择）协作流程，简化比赛前的准备工作。",
+        "lang": "HTML",
+        "stars": 2,
+        "updated": "2026-03-22",
+        "url": "https://github.com/Andycommander66/cs2-map-bp-tool"
+      }
+    ]
+  },
+  "contact": {
+    "channels": [
+      {
+        "name": "IPET 智能光电技术实验室 · 官网",
+        "action": "访问 →",
+        "desc": "我目前所在的实验室。官网包含研究方向、科研成果、实验设备与招新信息，招新入口位于官网首页。",
+        "external": "https://ipet.lzhilin.online:50000/"
+      },
+      {
+        "name": "GitHub · Andycommander66",
+        "action": "访问 →",
+        "desc": "代码托管主页。项目页的仓库列表即由你的浏览器从这里读取。",
+        "external": "https://github.com/Andycommander66"
+      },
+      {
+        "name": "荣誉与经历",
+        "action": "查看 →",
+        "desc": "竞赛获奖、任职情况、实验室与培养经历的完整记录。",
+        "to": "/honors"
+      },
+      {
+        "name": "个人主页",
+        "action": "返回 →",
+        "desc": "返回首页，查看当前身份、在研方向与最新进展。",
+        "to": "/"
+      }
+    ],
+    "mutedChannel": {
+      "title": "电子邮箱 · GitHub · 即时通讯",
+      "action": "暂未公开",
+      "desc": "出于隐私保护，这些渠道暂不在本站公开。如需联系，请先通过上方公开入口。",
+      "note": "后续若开放公开渠道，会在本页更新。"
+    },
+    "directions": [
+      {
+        "text": "竞赛组队",
+        "style": "",
+        "dot": ""
+      },
+      {
+        "text": "数学建模",
+        "style": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": ""
+      },
+      {
+        "text": "AIGC 与数字内容创作",
+        "style": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);"
+      },
+      {
+        "text": "C / C++ 工程实践",
+        "style": "",
+        "dot": ""
+      },
+      {
+        "text": "智能光电 · 计算机视觉",
+        "style": "--tag-bg:rgba(160,40,55,0.22);--tag-border:rgba(200,80,95,0.35);--tag-text:#f0b0b6;",
+        "dot": ""
+      },
+      {
+        "text": "学习交流",
+        "style": "--tag-bg:rgba(140,35,48,0.2);--tag-border:rgba(190,70,85,0.32);--tag-text:#f0a8b0;",
+        "dot": "background:#f0a0a8;box-shadow:0 0 8px rgba(240,140,150,0.7);"
+      }
+    ],
+    "notes": [
+      "本站不使用 Cookie，不接入访问统计、广告或任何第三方跟踪脚本。",
+      "全站样式与脚本均为本站自有文件，不依赖任何第三方 CDN。",
+      "项目页的仓库列表由你的浏览器直接向 GitHub 公开 API 读取；除此之外本站不发起任何第三方请求。",
+      "全站不含个人电话、住址、证件号码等敏感信息；涉及第三方的姓名亦不公开。",
+      "本站为个人主页，内容按实际经历整理，并持续更新。"
+    ]
+  }
+}

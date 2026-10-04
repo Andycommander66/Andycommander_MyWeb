@@ -1,0 +1,23 @@
+{
+  "name": "andycommander66-site",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Andycommander66 个人主页 · Vue 3 单页应用 + 零依赖内容后端",
+  "scripts": {
+    "dev": "vite",
+    "dev:server": "node server/index.js",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server/index.js",
+    "deploy": "vite build && node server/index.js"
+  },
+  "dependencies": {
+    "vue": "^3.5.43",
+    "vue-router": "^5.3.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.9",
+    "vite": "^8.3.2"
+  }
+}

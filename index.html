@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Andycommander66 · 个人主页</title>
+
+    <!-- 站点信息 -->
+    <meta name="description"
+        content="Andycommander66 的个人主页：计算机科学与技术专业在读，IPET 智能光电技术实验室成员，记录科研、竞赛与工程实践中的成长与荣誉。">
+    <meta name="theme-color" content="#0f0408">
+    <link rel="icon" type="image/x-icon" href="./andy.ico">
+    <!-- 静态兜底：脚本运行后会按当前页面改写为对应的规范地址 -->
+    <link rel="canonical" href="https://andycommander66.cn/">
+
+    <!-- 分享卡片 -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Andycommander66">
+    <meta property="og:url" content="https://andycommander66.cn/">
+    <meta property="og:title" content="Andycommander66 · 个人主页">
+    <meta property="og:description" content="计算机科学与技术专业在读 · IPET 智能光电技术实验室成员 · 科研、竞赛与工程实践">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Andycommander66 · 个人主页">
+    <meta name="twitter:description" content="计算机科学与技术专业在读 · IPET 智能光电技术实验室成员">
+
+    <script>
+        // 开屏判定必须早于首次绘制：只在本次会话首次进入时播放
+        (function () {
+            var root = document.documentElement;
+            root.classList.add('js');
+            var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            var first = false;
+            try {
+                first = !sessionStorage.getItem('ac66-booted');
+            } catch (e) {
+                first = false;
+            }
+            if (first && !reduce) {
+                try {
+                    sessionStorage.setItem('ac66-booted', '1');
+                } catch (e) { }
+                root.classList.add('booting');
+            } else {
+                root.classList.add('boot-done');
+            }
+        })();
+    </script>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

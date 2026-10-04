@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 · Andycommander66</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="theme-color" content="#0f0408">
+    <script>
+        // 路径级 404 兜底：把请求交回单页应用的 404 路由。
+        // 路由模式由构建变量决定，这里用同样的规则拼目标地址，避免两处不一致。
+        (function () {
+            var MODE = '__URL_MODE__';
+            var base = location.pathname.replace(/[^/]*$/, '');
+            location.replace(MODE === 'hash' ? base + '#/404' : base + '404');
+        })();
+    </script>
+</head>
+
+<body style="margin:0;background:#0f0408;color:#c5b8bb;font-family:'PingFang SC','Microsoft YaHei',sans-serif">
+    <noscript>
+        <p style="padding:24px">页面未找到。<a href="./" style="color:#f0a0a8">返回主页</a></p>
+    </noscript>
+</body>
+
+</html>

@@ -1,0 +1,442 @@
+/* ==========================================================================
+   responsive.css — 全站自适应统一层
+   在页面内联 <style> 之后引入，统一四个页面在各类尺寸下的表现。
+   只做尺寸适配，不改配色、字体族与视觉风格。
+   ========================================================================== */
+
+/* ---------- 0. 基础保障 ---------- */
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    /* 始终预留滚动条槽位：开屏锁滚动、页面长短切换时不再产生横向位移 */
+    scrollbar-gutter: stable;
+    /* 预留出的槽位用底色填充，避免右侧出现一条色差竖缝 */
+    background: #0f0408;
+}
+
+img,
+svg,
+canvas,
+video {
+    max-width: 100%;
+}
+
+p,
+h1,
+h2,
+h3,
+span,
+a,
+li {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+/* 正文行宽上限，避免超宽屏下行长过长 */
+.page-subtitle,
+.section-note {
+    max-width: 62ch;
+}
+
+.feature-meta,
+.tl-desc,
+.channel-desc,
+.honor-desc,
+.point {
+    max-width: 70ch;
+}
+
+/* ---------- 1. 网格最小宽度安全化（窄屏不再横向溢出） ---------- */
+.feature-grid {
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+}
+
+.honor-cols {
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+}
+
+.data-row {
+    grid-template-columns: repeat(auto-fit, minmax(min(120px, 100%), 1fr));
+}
+
+/* 重点荣誉中的整行卡片（青马工程三级培养） */
+.feature-wide {
+    grid-column: 1 / -1;
+}
+
+/* ---------- 2. 宽度阶梯（统一四个页面） ---------- */
+.page-wrap {
+    width: min(920px, 100% - 40px);
+}
+
+@media (min-width: 1500px) {
+    .page-wrap {
+        width: min(1060px, 100% - 96px);
+    }
+    .page-subtitle {
+        font-size: 1.06rem;
+    }
+    .feature-name,
+    .channel-name {
+        font-size: 0.98rem;
+    }
+    .mini-name,
+    .tl-title {
+        font-size: 0.95rem;
+    }
+    .honor-name {
+        font-size: 0.96rem;
+    }
+}
+
+@media (max-width: 1024px) {
+    .page-wrap {
+        padding-top: 108px;
+    }
+}
+
+/* 内容与导航的间距：按「导航底边 + 32~40px」重算，
+   避免导航放大后两者仍然贴得别扭或离得过远 */
+@media (max-width: 768px) {
+    .page-wrap {
+        width: min(920px, 100% - 32px);
+        padding-top: 88px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-wrap {
+        width: min(920px, 100% - 24px);
+        padding-top: 78px;
+    }
+    .glass-card {
+        padding: 20px 16px;
+    }
+    .feature-grid,
+    .honor-cols {
+        gap: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .page-wrap {
+        width: min(920px, 100% - 18px);
+        padding-top: 74px;
+    }
+}
+
+/* ---------- 3. 导航：位置、宽度与排版统一由本文件接管 ---------- */
+/* 用 left/right:0 + width:fit-content + 自动外边距居中，取代原来的
+   left:50% + translateX(-50%)。原因：left:50% 会把固定定位元素的
+   「可用宽度」压缩成视口的一半，小屏上内容一多就被挤到换行。
+   改成左右都为 0 后，可用宽度等于整个视口，导航按内容自然撑开。 */
+.nav-glass {
+    left: 0;
+    right: 0;
+    transform: none;
+    width: fit-content;
+    max-width: calc(100% - 24px);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 四个页面的导航项都不得换行；缺了这一条，窄屏会把标签压成两行 */
+.nav-link,
+.nav-btn-404 {
+    white-space: nowrap;
+}
+
+/* 尺寸阶梯集中在这里定义一次，四个页面共用，避免逐页漂移。
+   宽度上限已按最窄 320px 核算：导航内容最宽约 250px，可用宽度 296px。 */
+@media (max-width: 768px) {
+    .nav-glass {
+        top: 12px;
+        column-gap: 14px;
+        padding: 10px 22px;
+    }
+    .nav-link {
+        font-size: 13px;
+    }
+    .nav-btn-404 {
+        padding: 4px 13px;
+        font-size: 12px;
+    }
+    .nav-dot {
+        width: 7px;
+        height: 7px;
+    }
+    .nav-separator {
+        height: 14px;
+    }
+}
+
+@media (max-width: 600px) {
+    .nav-glass {
+        /* 覆盖 404 页原有的换行设置，四个页面统一为单行胶囊 */
+        flex-wrap: nowrap;
+        justify-content: center;
+        row-gap: 0;
+    }
+    .nav-dot,
+    .nav-separator {
+        flex-shrink: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-glass {
+        top: 10px;
+        column-gap: 11px;
+        padding: 11px 18px;
+    }
+    .nav-link {
+        font-size: 12.5px;
+        letter-spacing: 0.05em;
+    }
+    /* 首页主卡片：竖屏手机上略向上偏，避免导航与卡片之间空出一大片 */
+    .glass-panel-main {
+        top: 47%;
+    }
+}
+
+@media (max-width: 380px) {
+    .nav-glass {
+        padding: 10px 15px;
+        column-gap: 9px;
+    }
+    .nav-link {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 340px) {
+    .nav-glass {
+        padding: 9px 12px;
+        column-gap: 7px;
+        border-radius: 38px;
+    }
+    .nav-link {
+        font-size: 11px;
+        letter-spacing: 0.03em;
+    }
+    .nav-btn-404 {
+        padding: 3px 11px;
+        font-size: 11px;
+    }
+    .nav-dot {
+        width: 6px;
+        height: 6px;
+    }
+    .nav-separator {
+        height: 12px;
+    }
+}
+
+/* ---------- 4. 首页单屏：矮屏压缩留白与字号 ---------- */
+@media (max-height: 800px) and (min-width: 769px) {
+    .page-wrap {
+        padding-top: 96px;
+    }
+}
+
+@media (max-height: 780px) {
+    .glass-panel-main {
+        min-height: 0;
+        padding: clamp(20px, 2.6vw, 30px) clamp(20px, 2.6vw, 32px);
+        gap: clamp(9px, 1.3vw, 13px);
+    }
+    .hero-title {
+        font-size: clamp(1.6rem, 4vw, 2.6rem);
+    }
+    .hero-role {
+        font-size: clamp(0.88rem, 1.4vw, 1.02rem);
+    }
+    /* 需覆盖行内 gap，故使用 !important */
+    .hero-stagger {
+        gap: clamp(8px, 1.2vw, 11px) !important;
+    }
+}
+
+/* ---------- 5. 极矮屏（横屏手机 / 小窗口）：首页转为可滚动 ---------- */
+@media (max-height: 620px) {
+    .hero-container {
+        overflow-y: auto;
+    }
+    .glass-panel-main {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+        /* 首页主卡片：极矮屏下回到文档流，首行留白要盖过导航高度（底边约 47~50px） */
+        margin: clamp(84px, 14vh, 112px) auto 40px;
+        width: min(640px, calc(100% - 32px));
+        min-height: 0;
+    }
+    .glass-panel-main:hover {
+        transform: translateY(-2px);
+    }
+    .glass-panel-back-1,
+    .glass-panel-back-2,
+    .glass-accent {
+        display: none;
+    }
+    .scroll-indicator {
+        position: static;
+        left: auto;
+        right: auto;
+        transform: none;
+        margin: 6px auto 22px;
+    }
+    /* SPA 中 body 始终可滚动，所以只需放开 404 视图容器的高度，
+       并继续裁掉左右溢出的装饰光晕（否则会撑出横向滚动条） */
+    .view-404 .hero-container {
+        height: auto;
+        min-height: 100dvh;
+        overflow: hidden;
+    }
+}
+
+/* ---------- 6. 极窄屏：卡片宽度跟随视口 ---------- */
+@media (max-width: 380px) {
+    .glass-panel-main {
+        width: min(640px, calc(100% - 24px));
+    }
+    .page-title {
+        font-size: 1.5rem;
+    }
+    .glass-card {
+        padding: 16px 13px;
+    }
+    .feature {
+        padding: 13px 13px;
+    }
+    .mini {
+        padding: 9px 11px;
+    }
+    .data-number {
+        font-size: 1.15rem;
+    }
+}
+
+/* ---------- 7. 触屏：放大点击热区 + 明确的按压反馈 ---------- */
+@media (hover: none) and (pointer: coarse) {
+
+    /* 点击热区 */
+    .nav-link {
+        padding: 7px 3px;
+    }
+    .status-tag {
+        padding: 6px 13px;
+    }
+    .hero-cta,
+    .btn-404 {
+        padding: 13px 26px;
+    }
+    .to-top {
+        width: 46px;
+        height: 46px;
+    }
+    .channel,
+    .mini {
+        padding: 13px 14px;
+    }
+
+    /* 触屏没有 hover，用按下态补足反馈 */
+    .glass-card:active,
+    .feature:active,
+    .stage:active {
+        background: rgba(30, 9, 15, 0.62);
+        border-color: rgba(220, 110, 120, 0.32);
+        box-shadow: 0 0 30px rgba(200, 70, 80, 0.16);
+    }
+
+    .mini:active,
+    .channel:active,
+    .honor:active {
+        background: rgba(26, 9, 14, 0.6);
+        border-color: rgba(220, 110, 120, 0.34);
+    }
+
+    .status-tag:active {
+        transform: scale(0.95);
+        background: rgba(200, 60, 72, 0.36);
+        border-color: rgba(235, 125, 135, 0.6);
+    }
+
+    .hero-cta:active,
+    .btn-404:active {
+        transform: scale(0.965);
+        background: rgba(200, 55, 70, 0.26);
+        border-color: rgba(235, 125, 135, 0.6);
+    }
+
+    .nav-link:active {
+        color: rgba(255, 244, 246, 0.98);
+        text-shadow: 0 0 14px rgba(220, 100, 110, 0.75);
+    }
+
+    .nav-link:active::after {
+        transform: scaleX(1);
+    }
+
+    .nav-btn-404:active {
+        background: rgba(200, 55, 70, 0.4);
+        transform: scale(0.96);
+    }
+
+    .to-top:active {
+        transform: scale(0.92);
+    }
+
+    /* 时间线节点按下时亮起 */
+    .tl-item:active::before {
+        box-shadow: 0 0 18px rgba(235, 95, 110, 0.95), 0 0 34px rgba(235, 95, 110, 0.45);
+        transform: scale(1.3);
+    }
+}
+
+/* ---------- 8. 页脚：安全区、可点区域与矮屏让位 ---------- */
+.page-footer {
+    padding-bottom: calc(34px + env(safe-area-inset-bottom, 0px));
+}
+
+.scroll-indicator {
+    bottom: calc(30px + env(safe-area-inset-bottom, 0px));
+    /* 容器不吃事件，但两行文字都可悬停/可点击 */
+    pointer-events: none;
+}
+
+.scroll-indicator .scroll-text {
+    pointer-events: auto;
+}
+
+/* 矮屏：页脚上移并收窄，给主卡片让出空间，避免两者贴在一起 */
+@media (min-height: 621px) and (max-height: 860px) {
+    .scroll-indicator {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+        gap: 6px;
+    }
+    .scroll-line {
+        height: 18px;
+    }
+}
+
+@media (max-width: 480px) {
+    .scroll-indicator {
+        bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    }
+}
+
+/* ---------- 9. 大字号与高对比偏好 ---------- */
+@media (prefers-contrast: more) {
+    .nav-link {
+        color: rgba(240, 230, 232, 0.9);
+    }
+    .data-label,
+    .section-note,
+    .mini-date,
+    .tl-date,
+    .feature-date {
+        color: #b3a3a7;
+    }
+}
