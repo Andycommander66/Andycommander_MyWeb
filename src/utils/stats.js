@@ -88,8 +88,6 @@ export function computeStats(content) {
         highLevel: features.filter((f) => HIGH_LEVEL.test(f.level || '')).length,
         // 大学阶段
         university: features.filter((f) => UNIVERSITY_LEVEL.test(f.level || '')).length,
-        // 省级赛事入围：条目里显式勾选「入围省赛」
-        provincial: features.filter((f) => f.provincial === true).length,
         // 三级培养（青马工程整行卡片）
         qingma: hasQingma ? 1 : 0,
         // 重点荣誉区实际卡片数

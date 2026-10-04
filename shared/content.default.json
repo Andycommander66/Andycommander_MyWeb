@@ -35,10 +35,6 @@
       {
         "metric": "totalAwards",
         "label": "奖项与荣誉"
-      },
-      {
-        "metric": "provincial",
-        "label": "省级赛事入围"
       }
     ],
     "progress": {
@@ -65,10 +61,6 @@
       {
         "metric": "highLevel",
         "label": "市级及以上奖项"
-      },
-      {
-        "metric": "provincial",
-        "label": "省级赛事入围"
       },
       {
         "metric": "current",
@@ -111,8 +103,7 @@
         "date": "2026.09",
         "name": "2026 年大学生「AI+信息素养」大赛湖南赛区学校选拔赛",
         "award": "二等奖 · 已入围省赛",
-        "meta": "颁发：湖南理工大学图书馆",
-        "provincial": true
+        "meta": "颁发：湖南理工大学图书馆"
       }
     ],
     "qingma": {
